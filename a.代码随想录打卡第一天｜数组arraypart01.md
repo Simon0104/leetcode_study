@@ -1,5 +1,13 @@
 代码随想录算法训练营第一天| 704. 二分查找、27. 移除元素
 
+
+基础知识：
+数组是连续存放相同类型元素的集合
+notice：
+1.数组起始下标是0
+2.数组的内存空间地址是连续的，所以增删元素的时候会移动其他元素，因此时间复杂度为O(n)
+
+
 leetcode207二分查找
 
 第一种写法，定义 target 是在一个在左闭右闭的区间里，也就是[left, right] 
@@ -12,8 +20,7 @@ if (nums[middle] > target) right 要赋值为 middle - 1，因为当前这个num
 ！！！要一直坚持左闭右闭的原则，以为已经确定nums[middle]是大于target，那么就应该选择下一位（middle-1）
 那么接下来要查找的左区间结束下标位置就是 middle - 1
 例如在数组：1,2,3,4,7,9,10中查找元素2，如图所示：
-![Alt text](image.png)
-
+![Alt text](%E5%9B%BE%E7%89%871.png)
 class solution{
 public:
     int search(vector<int>& nums, int target){
@@ -35,6 +42,13 @@ public:
     }
 };
 
+1.	表达式的重构：
+	•	考虑到溢出发生在 left + right 的时候，如果 left 和 right 都是接近 INT_MAX 的大数，那么相加的结果可能会超出 int 的表示范围。
+	•	改为 left + (right - left) / 2 后，首先计算 (right - left) / 2。由于 right 和 left 都是非负数，right - left 结果不会超过 right，因此 (right - left) / 2 也不会很大。
+	2.	重构的数学等价性：
+	•	通过数学公式的等价性，可以证明 left + (right - left) / 2 和 (left + right) / 2 计算结果是相同的。
+	•	(left + right) / 2 可以拆分成 left + (right - left) / 2 这一形式。
+
 
 #二分法第二种写法
 如果说定义 target 是在一个在左闭右开的区间里，也就是[left, right) ，那么二分法的边界处理方式则截然不同。
@@ -44,7 +58,7 @@ while (left < right)，这里使用 < ,因为left == right在区间[left, right)
 依然可以是[1，1)来举例说明，因为左边已经包含1，但是右边不包含1，所以不可能left = right
 if (nums[middle] > target) right 更新为 middle，因为当前nums[middle]不等于target，去左区间继续寻找，而寻找区间是左闭右开区间，所以right更新为middle，即：下一个查询区间不会去比较nums[middle]
 在数组：1,2,3,4,7,9,10中查找元素2，如图所示：（注意和方法一的区别）
-![Alt text](image-1.png)
+![!\[Alt text\](image-1.png)](%E5%9B%BE%E7%89%872.png)
 class solution{
 public:
     int search(vector<int>& nums, int target){
@@ -65,6 +79,22 @@ public:
         }
     }
 }
+
+
+分析 int search(vector<int>& nums, int target)
+
+	1.	返回类型 (int):
+	•	int 是函数的返回类型，这意味着函数在完成其任务后会返回一个整数值。在这个具体的例子中，search 函数返回一个整数，该整数代表目标值在数组中的索引。如果目标值不在数组中，通常会返回 -1。
+	2.	函数名 (search):
+	•	search 是函数的名称。函数名用于标识和调用函数。在调用这个函数时，你会使用 search 这个名称。
+	3.	参数列表 (vector<int>& nums, int target):
+	•	参数列表指定了函数可以接受的输入。这个函数有两个参数：
+	1.	vector<int>& nums:
+	•	vector<int> 是标准库中的一个模板类，表示一个整数的动态数组。& 符号表示该参数是一个引用。通过引用传递可以避免复制整个向量，提高效率，尤其是当向量很大时。
+	•	nums 是参数的名称。它表示你传递给函数的整数向量。
+	2.	int target:
+	•	int 表示参数是一个整数。
+	•	target 是参数的名称，表示你要在向量中查找的目标值。
 
 
 
