@@ -119,6 +119,8 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 // 时间复杂度：O(n)
 // 空间复杂度：O(1)
+cpp
+```cpp
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
@@ -131,6 +133,25 @@ public:
         return slowIndex;
     }
 };
+```
+
+py
+```py
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left,right = 0,len(nums)-1
+        while left <= right:
+            mid = left + (right-left)//2
+            # num = nums[mid]
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid +1
+        return -1
+```
+
 
 
 
