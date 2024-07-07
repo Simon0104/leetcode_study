@@ -12,6 +12,7 @@ if (nums[middle] > target) right 要赋值为 middle - 1，因为当前这个num
 ！！！要一直坚持左闭右闭的原则，以为已经确定nums[middle]是大于target，那么就应该选择下一位（middle-1）
 那么接下来要查找的左区间结束下标位置就是 middle - 1
 例如在数组：1,2,3,4,7,9,10中查找元素2，如图所示：
+```
 class solution{
 public:
     int search(vector<int>& nums, int target){
@@ -30,8 +31,10 @@ public:
             return middle;
             }
         return 0;
+        }
     }
 };
+```
 
 1.	表达式的重构：
 	•	考虑到溢出发生在 left + right 的时候，如果 left 和 right 都是接近 INT_MAX 的大数，那么相加的结果可能会超出 int 的表示范围。
@@ -42,14 +45,14 @@ public:
 
 
 #二分法第二种写法
-如果说定义 target 是在一个在左闭右开的区间里，也就是[left, right) ，那么二分法的边界处理方式则截然不同。
+如果说定义 target 是在一个在左闭右开的区间里，也就是[left, right] ，那么二分法的边界处理方式则截然不同。
 有如下两点：
 
-while (left < right)，这里使用 < ,因为left == right在区间[left, right)是没有意义的
-依然可以是[1，1)来举例说明，因为左边已经包含1，但是右边不包含1，所以不可能left = right
+while (left < right)，这里使用 < ,因为left == right在区间[left, right]是没有意义的
+依然可以是(1，1)来举例说明，因为左边已经包含1，但是右边不包含1，所以不可能left = right
 if (nums[middle] > target) right 更新为 middle，因为当前nums[middle]不等于target，去左区间继续寻找，而寻找区间是左闭右开区间，所以right更新为middle，即：下一个查询区间不会去比较nums[middle]
 在数组：1,2,3,4,7,9,10中查找元素2，如图所示：（注意和方法一的区别）
-![!\[Alt text\](image-1.png)](%E5%9B%BE%E7%89%872.png)
+![!\[Alt text\](image-1.png)]
 class solution{
 public:
     int search(vector<int>& nums, int target){
@@ -155,7 +158,7 @@ class Solution:
 
 
 
-26. Remove Duplicates from Sorted Array
+1.  Remove Duplicates from Sorted Array
 
 Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 
