@@ -355,7 +355,8 @@ Output: [1,3,12,0,0]
 Example 2:
 Input: nums = [0]
 Output: [0]
-```
+cpp
+```cpp
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
@@ -373,6 +374,22 @@ public:
         }
     }
 };
+```
+py
+```py
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        write = 0
+        # for read in nums: In Python, when using for read in nums, read will be the actual value of the element in the list, not its index.
+        for read in range(len(nums)):
+            if(nums[read]!=0):
+                nums[write] = nums[read]
+                write+=1
+        for i in range(write,len(nums)):
+            nums[i] = 0
+        """
+        Do not return anything, modify nums in-place instead.
+        """
 ```
 
 844. Backspace String Compare
@@ -394,7 +411,7 @@ Example 3:
 Input: s = "a#c", t = "b"
 Output: false
 Explanation: s becomes "c" while t becomes "b".
-'''
+```cpp
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
@@ -413,7 +430,9 @@ public:
     return ret;
     }
 };
-'''
+```
+
+
 
 977. Squares of a Sorted Array
 Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
