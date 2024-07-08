@@ -92,7 +92,7 @@ public:
 
 
 
-Remove Element：
+27.Remove Element：
 Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
 
 Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
@@ -127,13 +127,13 @@ cpp
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        int slowIndex = 0;
-        for (int fastIndex = 0; fastIndex < nums.size(); fastIndex++) {
-            if (val != nums[fastIndex]) {
-                nums[slowIndex++] = nums[fastIndex];
+        int write = 0;
+        for(int read = 0;read<nums.size();read++){
+            if(nums[read] != val){
+                nums[write++] = nums[read];
             }
         }
-        return slowIndex;
+        return write;
     }
 };
 ```
@@ -141,21 +141,127 @@ public:
 py
 ```py
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        left,right = 0,len(nums)-1
-        while left <= right:
-            mid = left + (right-left)//2
-            # num = nums[mid]
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] > target:
-                right = mid - 1
-            else:
-                left = mid +1
-        return -1
+    def removeElement(self, nums: List[int], val: int) -> int:
+        write = 0
+        for read in nums:
+            if read != val:
+                nums[write] = read
+                write+=1
+        return write
+
 ```
 
-35. Search Insert Position
+69. Sqrt(x)
+Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
+
+You must not use any built-in exponent function or operator.
+
+For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+ 
+
+Example 1:
+Input: x = 4
+Output: 2
+Explanation: The square root of 4 is 2, so we return 2.
+
+Example 2:
+Input: x = 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
+cpp
+```cpp
+class Solution {
+public:
+    int mySqrt(int x) {
+        int left = 0;
+        int right = x;
+        while(left<=right){
+            long long mid = left+(right-left)/2;
+            if((mid*mid)>x){
+                right = mid-1;
+            }
+            else if((mid*mid)<x){
+                left = mid+1;
+            }
+            else{
+                return mid;
+            }
+        }
+        return right;
+    }
+};
+```
+py
+```py
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left,right = 0,x
+        while(left<=right):
+            mid = left+(right - left)//2
+            if(mid*mid>x):
+                right = mid-1
+            elif(mid*mid<x):
+                left = mid+1
+            else:
+                return mid
+        return right
+
+```
+
+367. Valid Perfect Square
+Given a positive integer num, return true if num is a perfect square or false otherwise.
+
+A perfect square is an integer that is the square of an integer. In other words, it is the product of some integer with itself.
+
+You must not use any built-in library function, such as sqrt.
+
+Example 1:
+Input: num = 16
+Output: true
+Explanation: We return true because 4 * 4 = 16 and 4 is an integer.
+
+Example 2:
+Input: num = 14
+Output: false
+Explanation: We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.
+
+```cpp
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        int left = 0; 
+        int right = num;
+        while (left <= right) {
+            long long mid = left + (right - left) / 2;
+            if ((mid*mid) > num) {
+                right = mid - 1;
+            } else if ((mid*mid) < num) {
+                left = mid + 1;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+```
+py
+```py
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        left,right = 0,num
+        while(left<=right):
+            mid = left+(right-left)//2
+            if((mid*mid)>num):
+                right = mid-1
+            elif((mid*mid)<num):
+                left = mid+1
+            else:
+                return True
+        return False
+```
+
+1.  Search Insert Position
 Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
 You must write an algorithm with O(log n) runtime complexity.
@@ -188,7 +294,7 @@ class Solution:
         return left
 ```
 
-1.  Remove Duplicates from Sorted Array
+26.  Remove Duplicates from Sorted Array
 
 Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 
@@ -208,14 +314,13 @@ Input: nums = [0,0,1,1,1,2,2,3,3,4]
 Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
 Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
 It does not matter what you leave beyond the returned k (hence they are underscores).
-```
+```cpp
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
         int write = 1;
-        /*nums[read-1] without first checking if read is zero. 
-        This results in undefined behavior because nums[read-1] tries to access memory before the start of the nums array when read is zero.
-        /*
+        nums[read-1] 
+        // without first checking if read is zero. This results in undefined behavior because nums[read-1] tries to access memory before the start of the nums array when read is zero.
         for(int read = 1;read<nums.size();read++){
             if(nums[read]!=nums[read-1]){
                 nums[write++] = nums[read];
@@ -225,6 +330,18 @@ public:
     }
 };
 ```
+py
+```py
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        write = 1
+        for read in range(1,len(nums)):
+            if(nums[read]!=nums[read-1]):
+                nums[write] = nums[read]
+                write+=1
+        return write
+```
+
 
 283. Move Zeroes
 Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
