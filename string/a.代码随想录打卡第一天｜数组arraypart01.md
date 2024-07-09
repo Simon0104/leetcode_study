@@ -462,6 +462,18 @@ public:
 };
 ```
 
+py
+```py
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        write = 0
+        for read in range(len(nums)):
+            nums[write] = nums[read]*nums[read]
+            write+=1
+        result = sorted(nums)
+        return result
+```
+
 209. Minimum Size Subarray Sum
 Given an array of positive integers nums and a positive integer target, return the minimal length of a 
 subarray
@@ -480,7 +492,7 @@ Example 3:
 Input: target = 11, nums = [1,1,1,1,1,1,1,1]
 Output: 0
 
-```
+```cpp
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
@@ -496,9 +508,22 @@ public:
             }
         }
         return minl == INT32_MAX ? 0 : minl;
-        /*
-    condition ? value_if_true : value_if_false;
-        /*
+    // condition ? value_if_true : value_if_false;
     }
 };
+```
+py
+```py
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left =0
+        sum = 0
+        minl = float('inf')
+        for right in range(len(nums)):
+            sum += nums[right]
+            while(sum>=target):
+                sum -= nums[left]
+                minl = min(minl,(right-left+1))
+                left+=1
+        return 0 if minl == float('inf') else minl
 ```

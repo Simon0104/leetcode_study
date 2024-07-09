@@ -25,7 +25,7 @@ Output: 4
 Explanation: We can pick from trees [2,3,2,2].
 If we had started at the first tree, we would only pick from trees [1,2].
 
-```
+```cpp
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
