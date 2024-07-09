@@ -446,8 +446,9 @@ After sorting, it becomes [0,1,9,16,100].
 Example 2:
 Input: nums = [-7,-3,2,3,11]
 Output: [4,9,9,49,121]
- 
-```
+
+cpp
+```cpp
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
