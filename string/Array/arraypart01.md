@@ -527,3 +527,87 @@ class Solution:
                 left+=1
         return 0 if minl == float('inf') else minl
 ```
+
+59. Spiral Matrix II
+    
+Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
+![Alt text](image.png)
+
+Example 1:
+Input: n = 3
+Output: [[1,2,3],[8,9,4],[7,6,5]]
+
+Example 2:
+Input: n = 1
+Output: [[1]]
+```cpp
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> res(n,vector<int>(n,0));
+        int startx = 0;
+        int starty = 0;
+        int loop = n/2;
+        int mid = n/2;
+        int i = 0;
+        int j = 0;
+        int count = 1;
+        int offset = 1;
+        while(loop--){
+            i = startx;
+            j = starty;
+            for(;j<n-offset;j++){
+                res[i][j] = count++;
+            }
+            for(;i<n-offset;i++){
+                res[i][j] = count++;
+            }
+            for(;j>starty;j--){
+                res[i][j] = count++;
+            }
+            for(;i>startx;i--){
+                res[i][j] = count++;
+            }
+            offset++;
+            startx++;
+            starty++;
+        }
+        if(n%2 != 0){
+            res[mid][mid] = count;
+        }
+        return res;
+
+    }
+};
+```
+py
+```py
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        nums = [[0] * n for _ in range(n)]
+        startx, starty = 0, 0               # 起始点
+        loop, mid = n // 2, n // 2          # 迭代次数、n为奇数时，矩阵的中心点
+        count = 1                           # 计数
+        offset = 1
+        # for offset in range(1, loop + 1) : 
+        while loop>0:     # 每循环一层偏移量加1，偏移量从1开始
+            for i in range(starty, n - offset) :    # 从左至右，左闭右开
+                nums[startx][i] = count
+                count += 1
+            for i in range(startx, n - offset) :    # 从上至下
+                nums[i][n - offset] = count
+                count += 1
+            for i in range(n - offset, starty, -1) : # 从右至左
+                nums[n - offset][i] = count
+                count += 1
+            for i in range(n - offset, startx, -1) : # 从下至上
+                nums[i][starty] = count
+                count += 1                
+            startx += 1         # 更新起始点
+            starty += 1
+            offset += 1
+            loop -= 1
+        if n % 2 != 0 :			# n为奇数时，填充中心点
+            nums[mid][mid] = count 
+        return nums
+```
