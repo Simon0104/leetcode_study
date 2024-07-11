@@ -679,3 +679,6 @@ compare 54. Spiral Matrix and 59. Spiral Matrix II,
 INPUP AND OUTPUT:
 Spiral Matrix takes a 2D matrix and returns a 1D vector.
 Spiral Matrix II takes an integer n and returns a 2D matrix.
+
+
+![Alt text](image-3.png)
