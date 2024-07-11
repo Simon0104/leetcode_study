@@ -611,3 +611,71 @@ class Solution:
             nums[mid][mid] = count 
         return nums
 ```
+
+54. Spiral Matrix
+Given an m x n matrix, return all elements of the matrix in spiral order.
+
+ 
+![Alt text](image-1.png)
+Example 1:
+Input: matrix = [ [1,2,3],[4,5,6],[7,8,9] ]
+Output: [1,2,3,6,9,8,7,4,5]
+
+![Alt text](image-2.png)
+Example 2:
+Input: matrix = [ [1,2,3,4],[5,6,7,8],[9,10,11,12] ]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+```cpp
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        // vector<vector<int>> res(n, vector<int>(n, 0));
+        vector<int> res;
+        int row = matrix.size();
+        int col = matrix[0].size();
+        int startx = 0;
+        int starty = 0;
+        int offset = 1;
+        int loop = min(row, col) / 2;
+        int mid = row/2;
+        while(loop--){
+            int i = startx;
+            int j = starty;
+            for(j;j<col-offset;j++){
+                res.push_back(matrix[startx][j]);
+            }
+            for(i;i<row-offset;i++){
+                res.push_back(matrix[i][col - offset]);
+            }
+            for(;j>starty;j--){
+                res.push_back(matrix[row - offset][j]);
+            }
+            for(;i>startx;i--){
+                res.push_back(matrix[i][starty]);
+            }
+            startx++;
+            starty++;
+            offset++;
+        }
+        if (min(row, col) % 2 != 0) {
+            if (row <= col) {
+                for (int j = starty; j < col - starty; j++) {
+                    res.push_back(matrix[startx][j]);
+                }
+            } else {
+                for (int i = startx; i < row - startx; i++) {
+                    res.push_back(matrix[i][starty]);
+                }
+            }
+        }
+        return res;
+    }
+};
+```
+
+key conclustion:
+compare 54. Spiral Matrix and 59. Spiral Matrix II,
+
+INPUP AND OUTPUT:
+Spiral Matrix takes a 2D matrix and returns a 1D vector.
+Spiral Matrix II takes an integer n and returns a 2D matrix.
