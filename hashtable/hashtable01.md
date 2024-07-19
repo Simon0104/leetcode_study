@@ -60,3 +60,44 @@ record[ord(i) - ord('a')] accesses the array record at the position correspondin
 += 1 increments the count of the character i in the record array.
 
 
+383. Ransom Note
+Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+Each letter in magazine can only be used once in ransomNote.
+Example 1:
+Input: ransomNote = "a", magazine = "b"
+Output: false
+
+Example 2:
+Input: ransomNote = "aa", magazine = "ab"
+Output: false
+
+Example 3:
+Input: ransomNote = "aa", magazine = "aab"
+Output: true
+
+```cpp
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int record[26] = {0};
+        if(magazine.size() < ransomNote.size()){
+            return false;
+        }
+        for(int i = 0;i<magazine.size();i++){
+            record[magazine[i] - 'a']++;
+        }
+        for(int j = 0;j<ransomNote.size();j++){
+            record[ransomNote[j] - 'a']--;
+            if(record[ransomNote[j] - 'a'] < 0){
+            return false;
+            }
+        }
+        return true;
+    }
+};
+```
+
+```py
+
+```
