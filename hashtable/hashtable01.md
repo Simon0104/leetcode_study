@@ -21,11 +21,11 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         int record[26] = {0};
-        for(int i = 0;i < s.size();i++){
-            record[s[i] - 'a']++;
+        for(auto i : s){
+            record[i - 'a']++;
         }
-        for(int j = 0;j < t.size();j++){
-            record[t[j] - 'a']--;
+        for(auto j : t){
+            record[j - 'a']--;
         }
         for(int a = 0;a < 26;a++){
             if(record[a] != 0){
