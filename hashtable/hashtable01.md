@@ -1,7 +1,5 @@
 当我们遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法。但是哈希法也是牺牲了空间换取了时间，因为我们要使用额外的数组，set或者是map来存放数据，才能实现快速的查找
 
-
-
 242. Valid Anagram
 
 Given two strings s and t, return true if t is an anagram of s, and false otherwise.
@@ -51,6 +49,8 @@ class Solution:
                 return False
         return True
 ```
+conclusion:
+查找元素是否匹配可以考虑使用hash，数组就是最简单的hashtable，首先创建一个空的数组，然后遍历s，求出相对位置，然后将每一步在减掉
 Here's what record[ord(i) - ord('a')] += 1 does:
 
 ord(i) gets the ASCII value of the character i.
