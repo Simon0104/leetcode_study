@@ -18,7 +18,7 @@ Output: false
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        int record[26] = {0};
+        vector<int>record(26,0);
         for(auto i : s){
             record[i - 'a']++;
         }
@@ -50,7 +50,10 @@ class Solution:
         return True
 ```
 conclusion:
-查找元素是否匹配可以考虑使用hash，数组就是最简单的hashtable，首先创建一个空的数组，然后遍历s，求出相对位置，然后将每一步在减掉
+查找元素是否匹配可以考虑使用hash，数组就是最简单的hashtable
+首先创建一个空的数组vector<int>record(26,0)名字为record都container容器，容量为26位然后初始化为0，这个存储的结果
+首先遍历s，求出与‘a’相对位置，讲相对位置保存在上述container，然后遍历t将每一项与container中的相对位置进行比较，最后如果container中存在非零项则return false
+
 Here's what record[ord(i) - ord('a')] += 1 does:
 
 ord(i) gets the ASCII value of the character i.
