@@ -46,6 +46,7 @@ public:
                 return {record[complement], i};  // 返回补数的索引和当前元素的索引
             }
             record[nums[i]] = i;  // 将当前元素及其索引插入哈希表
+            // 例如:record[2] = 0,左面是数值，右边是键
         }
         return {};  // 如果没有找到，返回空的向量
     }
