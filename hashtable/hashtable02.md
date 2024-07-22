@@ -39,15 +39,15 @@ public:
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        std::unordered_map <int,int> map;
-        for(int i = 0; i < nums.size(); i++) {
-            // auto iter = map.find(target - nums[i]); 
-            if(map.find(target - nums[i]) != map.end()) {
-                return {map[target-nums[i]], i};
+        unordered_map<int, int> record;  // 初始化一个空的哈希表
+        for (int i = 0; i < nums.size(); i++) {  // 遍历数组
+            int complement = target - nums[i];  // 计算补数
+            if (record.find(complement) != record.end()) {  // 如果补数在哈希表中
+                return {record[complement], i};  // 返回补数的索引和当前元素的索引
             }
-            map.insert(pair<int, int>(nums[i], i)); 
+            record[nums[i]] = i;  // 将当前元素及其索引插入哈希表
         }
-        return {};
+        return {};  // 如果没有找到，返回空的向量
     }
 };
 ```
