@@ -461,6 +461,21 @@ public:
     }
 };
 ```
+```cpp
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int> result;
+        for(auto i:nums){
+            i = i * i;
+            result.push_back(i);
+        }
+        sort(result.begin(),result.end());
+        return result;
+    }
+};
+```
+
 
 py
 ```py
