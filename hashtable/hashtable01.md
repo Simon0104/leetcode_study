@@ -18,15 +18,18 @@ Output: false
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        vector<int>record(26,0);
-        for(auto i : s){
-            record[i - 'a']++;
+        unordered_map<int,int> result;
+        // 因为是map所以需要键值对，因此需要<int,int>
+        for(int i = 0;i<s.size();i++){
+            int s_key = s[i] - 'a';
+            result[s_key]++; 
         }
-        for(auto j : t){
-            record[j - 'a']--;
+        for(int j = 0;j<t.size();j++){
+            int t_key = t[j] - 'a';
+            result[t_key]--;
         }
-        for(int a = 0;a < 26;a++){
-            if(record[a] != 0){
+        for(int a = 0;a<26;a++){
+            if(result[a] != 0){
                 return false;
             }
         }
@@ -38,12 +41,13 @@ public:
 ```py
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        record = [0] * 26
+        record = [0]*26
         for i in s:
-            record[ord(i) - ord("a")]+=1
-            # In Python, the ord function is used to get the ASCII value of a character
+            result_s = ord(i) - ord("a")
+            record[result_s] +=1
         for j in t:
-            record[ord(j) - ord("a")]-=1
+            result_t = ord(j) - ord("a")
+            record[result_t] -=1
         for a in range(26):
             if(record[a] != 0):
                 return False

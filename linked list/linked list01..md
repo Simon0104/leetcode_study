@@ -26,21 +26,22 @@ Output: []
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        ListNode *dummyHead = new ListNode(0);
-        dummyHead->next = head;
-        ListNode *cur = dummyHead;
-        while(cur->next != nullptr){
+        ListNode *dummyhead = new ListNode(0);
+        dummyhead->next = head;
+        ListNode *cur = dummyhead;
+        if(head == nullptr){
+            return {};
+        }
+        while(cur != nullptr and cur->next != nullptr){
             if(cur->next->val == val){
-                ListNode *tep = cur->next;
                 cur->next = cur->next->next;
-                delete tep;
             }
             else{
                 cur = cur->next;
-            }
+            } 
         }
-        ListNode * result = dummyHead->next;
-        delete dummyHead;
+        ListNode *result = dummyhead->next;
+        delete dummyhead;
         return result;
     }
 };
