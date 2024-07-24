@@ -140,14 +140,14 @@ Explanation: There is no cycle in the linked list.
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode *fast = head;
         ListNode *slow = head;
-        while(fast != NULL and fast->next != NULL){
+        ListNode *fast = head;
+        while(fast and fast->next){
             fast = fast->next->next;
             slow = slow->next;
             if(fast == slow){
-                ListNode *index1 = head;
-                ListNode *index2 = fast;
+                ListNode *index1 = fast;
+                ListNode *index2 = head;
                 while(index1 != index2){
                     index1 = index1->next;
                     index2 = index2->next;
