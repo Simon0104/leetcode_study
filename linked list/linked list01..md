@@ -191,6 +191,24 @@ public:
 ```
 
 ```py
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummyhead = ListNode(0)
+        dummyhead.next = head
+        cur = dummyhead
+        while(cur.next != None and cur.next.next != None):
+            temp = cur.next
+            temp1 = cur.next.next.next
+            cur.next = cur.next.next
+            cur.next.next = temp
+            cur.next.next.next = temp1
+            cur = cur.next.next
+        return dummyhead.next
 
 ```
 
