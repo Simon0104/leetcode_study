@@ -211,7 +211,10 @@ class Solution:
         return dummyhead.next
 
 ```
-
+!!conclusion:
+temp = cur->next这句的意思是把temp放在cur下一个的位置1即可，并不是指向1（因为没有next就不是指针！！！）
+cur.next = cur.next.next这句话的意思就是cur下一个的指针指向下一个的下一个
+（因为存在next就是指针）
 
 we can't just change the value inside the node, but need to actually exchange nodes.
 so that why we should define the dummyhead
