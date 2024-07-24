@@ -60,10 +60,13 @@ To safely update pointers: When you update the next pointer of the current node 
 #         self.next = next
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        dummyhead = ListNode(next = head)
+        dummyhead = ListNode(0)
+        dummyhead.next = head
         cur = dummyhead
-        while cur.next:
-            if cur.next.val == val:
+        if(head == None):
+            return None
+        while (cur.next != None):
+            if(cur.next.val == val):
                 cur.next = cur.next.next
             else:
                 cur = cur.next
@@ -103,22 +106,21 @@ public:
     ListNode* reverseList(ListNode* head) {
         ListNode *cur = head;
         ListNode *pre = nullptr;
-        ListNode *tem = nullptr;
+        if(head == nullptr){
+            return nullptr;
+        }
         while(cur != nullptr){
-            tem = cur->next;
+            ListNode *index = cur->next;
             cur->next = pre;
             pre = cur;
-            cur = tem;
-            // let previous pointer allocate on the left 
+            cur = index;
         }
         return pre;
-
     }
 };
 ```
 
 ```py
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -128,11 +130,11 @@ class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         cur = head
         pre = None
-        while (cur != None):
-            tem = cur.next
+        while(cur != None):
+            index = cur.next
             cur.next = pre
             pre = cur
-            cur = tem
+            cur = index
         return pre
 ```
 
