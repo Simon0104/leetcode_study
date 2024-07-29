@@ -136,31 +136,30 @@ Explanation: You need to reduce multiple spaces between two words to a single sp
 class Solution {
 public:
     string reverseWords(string s) {
-        removeExtraSpaces(s); 
+        removeExtraSpaces(s);
         reverse(s.begin(), s.end());
         int start = 0;
         for (int end = 0; end <= s.size(); end++) {
-            if (end == s.size() || s[end] == ' ') {
-                int left = start, right = end - 1;
-                while (left < right) {
-                    swap(s[left], s[right]);
-                    left++;
-                    right--;
-                }
+            if (end == s.size() or s[end] == ' ') {
+                reverse(s.begin() + start, s.begin() + end);
                 start = end + 1;
             }
         }
-        return s; 
+        return s;
     }
 
 private:
     void removeExtraSpaces(string& s) {
     // 因为主函数直接引用string，所以无需返回任何数值
+    // slow和fast遍历的都是字母并非单词！！！
         int slow = 0;
         for (int fast = 0; fast < s.size(); ++fast) {
             if (s[fast] != ' ') {
+                // " "  这个表示字符串
+                // ' ' 这个表示字符
                 if (slow != 0) s[slow++] = ' ';
                 while (fast < s.size() && s[fast] != ' ') {
+                    // 此处应该让指针在单词内部遍历了！
                     s[slow++] = s[fast++];
                 }
             }
@@ -168,4 +167,24 @@ private:
         s.resize(slow);
     }
 };
+```
+
+```py
+class Solution:
+    def removeExtraSpaces(self, s: str) -> str:
+        # 移除多余空格
+        words = s.split()
+        return ' '.join(words)
+
+    def reverseWords(self, s: str) -> str:
+        # 去除多余空格
+        s = self.removeExtraSpaces(s)
+        # 反转整个字符串
+        s = s[::-1]
+        # 将反转后的字符串分割成单词列表
+        words = s.split(' ')
+        # 反转每个单词
+        words = [word[::-1] for word in words]
+        # 将单词重新组合成字符串
+        return ' '.join(words)
 ```
