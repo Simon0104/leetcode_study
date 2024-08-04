@@ -308,6 +308,7 @@ public:
                 que.pop();
                 if (i == (length - 1)){
                     result.push_back(node->val);
+                    // 前面的都pop掉，只保留遍历层最后一个插入
                 }
                 if(node->left){
                     que.push(node->left);
@@ -321,3 +322,101 @@ public:
     }
 };
 ```
+
+637. Average of Levels in Binary Tree
+
+Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.
+ 
+
+Example 1:
+
+
+Input: root = [3,9,20,null,null,15,7]
+Output: [3.00000,14.50000,11.00000]
+Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+Hence return [3, 14.5, 11].
+Example 2:
+
+
+Input: root = [3,9,20,15,7]
+Output: [3.00000,14.50000,11.00000]
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<double> averageOfLevels(TreeNode* root) {
+        queue<TreeNode*> que;
+        vector<double>result;
+        if(root == NULL){
+            return result;
+        }
+        else{
+            que.push(root);
+            while(!que.empty()){
+                double length = que.size();
+                double sum = 0;
+                double avg = 0;
+                for(int i = 0;i<length;i++){
+                    TreeNode* node = que.front();
+                    que.pop();
+                    sum += node->val;
+                    if(node->left){
+                        que.push(node->left);
+                    }
+                    if(node->right){
+                        que.push(node->right);
+                    }
+                }
+                avg = double(sum/length);
+                result.push_back(avg);
+            }
+        }
+        return result;
+    }
+};
+```
+key:
+node->val 是获取二叉树node的对应数值
+相对应的存储形式要注意，double sum = 0;
+
+```py
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        queue = deque()
+        result = list()
+        if(root is None):
+            return result
+        else:
+            queue.append(root)
+            while(queue):
+                length = len(queue)
+                sum = 0
+                for _ in range(length):
+                    cur = queue.popleft()
+                    sum += cur.val
+                    if(cur.left):
+                        queue.append(cur.left)
+                    if(cur.right):
+                        queue.append(cur.right)
+                avg = sum/length
+                result.append(avg)
+        return result
+        
+```
+
