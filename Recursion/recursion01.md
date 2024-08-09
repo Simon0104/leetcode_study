@@ -97,3 +97,20 @@ gpt：
 返回上一层后，path.pop_back() 撤销上一步选择，然后 for 循环中的 i++ 执行，检查是否继续循环或返回更上一层递归。
 最终，程序会逐层返回，直到所有递归层次都结束，完成组合的生成。
 ```
+```py
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        result = list()
+        path = list()
+        self.backtracking(n, k, 1, path, result)
+        return result
+
+    def backtracking(self, n, k, startIndex, path, result):
+        if len(path) == k:
+            result.append(path[:])
+            return
+        for i in range(startIndex, n + 1):
+            path.append(i)  
+            self.backtracking(n, k, i + 1, path, result)
+            path.pop()  
+```
