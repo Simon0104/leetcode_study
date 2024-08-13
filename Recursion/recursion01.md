@@ -331,3 +331,70 @@ private:
     }
 };
 ```
+
+
+131. Palindrome Partitioning
+Given a string s, partition s such that every 
+substring of the partition is a palindrome.
+Return all possible palindrome partitioning of s.
+
+ 
+Example 1:
+
+Input: s = "aab"
+Output: [["a","a","b"],["aa","b"]]
+Example 2:
+
+Input: s = "a"
+Output: [["a"]]
+
+```cpp
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+        if(s.empty()){
+            return result;
+        }
+        backtracking(s,0);
+        return result;
+    }
+private:
+    vector<vector<string>> result;
+    vector<string> path;
+
+    void backtracking(string s, int startIndex) {
+        if (startIndex == s.size()) {
+            result.push_back(path);
+            return;
+        }
+
+        for (int i = startIndex; i < s.size(); i++) {
+            if (isPalindrome(s, startIndex, i)) {
+
+                string str = s.substr(startIndex, i - startIndex + 1);
+                path.push_back(str);
+                backtracking(s, i + 1);
+                path.pop_back();
+            }
+        }
+    }
+    // bool isPalindrome(string s, int start, int end) {
+    //     for (int i = start, j = end; i < j; i++, j--) {
+    //         if (s[i] != s[j]) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    bool isPalindrome(string s, int left, int right) {
+        while (left < right) {
+            if (s[left] != s[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
+```
